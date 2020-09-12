@@ -1,9 +1,8 @@
+from locust import HttpUser, task, between
 
-from locust import HttpLocust, TaskSet, task, between
-import random
-import string
+class MyUser(HttpUser):
+    wait_time = between(5, 15)
 
-class WebsiteTasks(TaskSet):
     @task
     def index(self):
         self.client.get("/")
@@ -11,6 +10,3 @@ class WebsiteTasks(TaskSet):
     def update(self):
         self.client.get("/guestbook.php?cmd=set&key=messages&value=,JohnDietish,")
 
-class WebsiteUser(HttpLocust):
-    task_set = WebsiteTasks
-    wait_time = between(5, 15)

@@ -17,3 +17,18 @@ spec:
   selector:
     app: guestbook
     tier: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-internal
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: guestbook
+    tier: frontend
